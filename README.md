@@ -2,7 +2,7 @@
 
 RAG Codebase Debugger lets you ask natural-language questions about a codebase and receive answers grounded in the code itself. It combines structure-aware document chunking, Hugging Face embeddings, a local FAISS vector index, and a Groq-powered language model.
 
-The included knowledge base is the C++ **Wolfenstein3D Clone** project. The application is intended to make unfamiliar codebases easier to explore, debug, and understand.
+The included knowledge base is the C++ [**Wolfenstein3D Clone**](https://github.com/vaibhav-yerkar/Wolfenstein3D_Clone) project. The application is intended to make unfamiliar codebases easier to explore, debug, and understand.
 
 ## UI (Streamlit)
 ![alt text](<Screenshot 2026-09-05 at 10.40.08 PM.png>)

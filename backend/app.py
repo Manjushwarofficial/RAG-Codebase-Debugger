@@ -47,9 +47,7 @@ def cpp_chunks(source: str, chunk_size: int = 1000) -> list[str]:
     try:
         from tree_sitter_languages import get_parser
     except ImportError:
-        return RecursiveCharacterTextSplitter.from_language(
-            Language.CPP, chunk_size=chunk_size, chunk_overlap=150
-        ).split_text(source)
+        return RecursiveCharacterTextSplitter.from_language(...)
 
     parser = get_parser("cpp")
     tree = parser.parse(source.encode("utf-8"))
