@@ -3,28 +3,27 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from langchain_groq import ChatGroq
 from pydantic import BaseModel
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
-load_dotenv()
-
 BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
+
 DEFAULT_INDEX_PATH = BASE_DIR.parent / "faiss_index"
 FAISS_INDEX_PATH = os.getenv("FAISS_INDEX_PATH", str(DEFAULT_INDEX_PATH))
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 db = FAISS.load_local(FAISS_INDEX_PATH, embeddings, allow_dangerous_deserialization=True)
+retriever = db.as_retriever(search_kwargs={"k": 3})
 
 # llm = ChatGoogleGenerativeAI(model="gemini-flash-latest", temperature=0.2, max_output_tokens=1024)
-from langchain_ollama import ChatOllama
-
-llm = ChatOllama(model="llama3.1:8b", temperature=0.2)
-retriever = db.as_retriever(search_kwargs={"k": 3})
+llm = ChatGroq(model="openai/gpt-oss-120b", temperature=0.2, max_tokens=1024)
 
 SYSTEM_PROMPT = """You are a helpful assistant that answers questions about the codebase.
 You are given a question and a set of context documents. Use the context to answer the question.
@@ -71,11 +70,11 @@ async def query(request: QueryRequest):
         start = time.time()
         result = rag_chain.invoke({"input": request.query})
         elapsed = time.time() - start
-        print(f"=== rag_chain.invoke took {elapsed:.2f}s ===")
+        print(f"rag_chain.invoke took {elapsed:.2f}s")
         answer = result["answer"]
         sources = result.get("context", [])
         return {"answer": answer, "sources": [doc.metadata for doc in sources]}
     except Exception as e:
-        print("=== ERROR IN /query ===")
+        print(" ERROR IN /query ")
         traceback.print_exc()
         return {"error": str(e)}

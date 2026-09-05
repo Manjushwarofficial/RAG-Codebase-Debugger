@@ -5,6 +5,7 @@ API_URL = "http://127.0.0.1:8000/query"
 
 st.title("RAG Codebase Debugger")
 st.write("Ask questions about the codebase and get answers based on the context of the code.")
+st.markdown("Codebase Link : [Click here](https://github.com/vaibhav-yerkar/Wolfenstein3D_Clone)")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
