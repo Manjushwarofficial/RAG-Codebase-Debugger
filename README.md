@@ -28,6 +28,11 @@ knowledge_base/   # Source material used for retrieval
 requirements.txt
 ```
 
+## UML and Sequence Diagram
+<img width="1672" height="941" alt="ChatGPT Image Sep 6, 2026 at 06_12_35 PM" src="https://github.com/user-attachments/assets/420ea111-2a0c-413d-90f3-1d594f4b0005" />
+<img width="1672" height="941" alt="ChatGPT Image Sep 6, 2026 at 06_16_21 PM" src="https://github.com/user-attachments/assets/d5606df6-623b-4793-bb16-6a53bad04b6d" />
+
+
 ## Requirements
 
 - Python 3.10 or newer
