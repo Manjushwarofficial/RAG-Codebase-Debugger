@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL = "http://13.60.217.117:8000/query"
+API_URL = "http://51.20.32.147:8000/query"
 
 st.title("RAG Codebase Debugger")
 st.write("Ask questions about the codebase and get answers based on the context of the code.")
